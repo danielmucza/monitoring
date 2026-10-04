@@ -1,12 +1,13 @@
 package com.aldisued.iot.monitoring.controller;
 
-import com.aldisued.iot.monitoring.dto.SensorReadingDto;
-import com.aldisued.iot.monitoring.entity.SensorReading;
-import com.aldisued.iot.monitoring.service.SensorReadingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.aldisued.iot.monitoring.dto.SensorReadingDto;
+import com.aldisued.iot.monitoring.entity.SensorReading;
+import com.aldisued.iot.monitoring.service.SensorReadingService;
 
 @RestController
 @RequestMapping("/sensor-readings")
