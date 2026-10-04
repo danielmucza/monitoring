@@ -2,10 +2,13 @@ package com.aldisued.iot.monitoring.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,9 +25,11 @@ public class Sensor {
   private String name;
 
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private SensorType type;
 
-  public Sensor() {}
+  public Sensor() {
+  }
 
   public Sensor(String name, SensorType type) {
     this.name = name;
