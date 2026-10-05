@@ -1,6 +1,7 @@
 package com.aldisued.iot.monitoring.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,18 @@ public interface SensorReadingRepository extends JpaRepository<SensorReading, Lo
       @Param("sensorType") SensorType sensorType,
       @Param("from") LocalDateTime from,
       @Param("to") LocalDateTime to);
+
+  @Query("""
+      SELECT sensorReading.value
+      FROM SensorReading sensorReading
+      WHERE sensorReading.sensor.type = :sensorType
+        AND sensorReading.timestamp >= :from AND sensorReading.timestamp <= :to
+      ORDER BY sensorReading.timestamp
+      """)
+  List<Double> findSensorReadingValuesBySensorTypeInWindow(
+      @Param("sensorType") SensorType sensorType,
+      @Param("from") LocalDateTime from,
+      @Param("to") LocalDateTime to
+  );
 
 }

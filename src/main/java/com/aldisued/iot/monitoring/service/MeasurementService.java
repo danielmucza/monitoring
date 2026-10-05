@@ -19,10 +19,9 @@ public class MeasurementService {
     this.sensorReadingRepository = sensorReadingRepository;
   }
 
-  public List<Double> getMeasurementValuesBySensorType(SensorType sensorType, LocalDateTime from,
-      LocalDateTime to) {
-    // TODO: Task 8
-    return List.of();
+  @Transactional(readOnly = true)
+  public List<Double> getMeasurementValuesBySensorType(SensorType sensorType, LocalDateTime from, LocalDateTime to) {
+    return sensorReadingRepository.findSensorReadingValuesBySensorTypeInWindow(sensorType, from, to);
   }
 
   @Transactional(readOnly = true)
