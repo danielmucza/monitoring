@@ -1,5 +1,6 @@
 package com.aldisued.iot.monitoring.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,8 +32,27 @@ public class MeasurementCalculatorService {
   }
 
   public List<Double> getMovingAverage(List<Double> data, int windowSize) {
-    // TODO: Task 10
-    return List.of();
+    if (data == null || data.isEmpty()) {
+      throw new IllegalArgumentException("Data must not be null or empty");
+    }
+
+    if (windowSize <= 0 || windowSize > data.size()) {
+      throw new IllegalArgumentException("Window size must be greater than 0 and less than or equal to the data size");
+    }
+
+    final List<Double> movingAverages = new ArrayList<>();
+    double currentSum = 0;
+    for (int i = 0; i < windowSize; i++) {
+      currentSum += data.get(i);
+    }
+    movingAverages.add(currentSum / windowSize);
+
+    for (int i = windowSize; i < data.size(); i++) {
+      currentSum += data.get(i) - data.get(i - windowSize);
+      movingAverages.add(currentSum / windowSize);
+    }
+
+    return movingAverages;
   }
 
 }
